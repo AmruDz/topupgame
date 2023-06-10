@@ -62,7 +62,7 @@
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons opacity-10">category</i>
                 </div>
-                <span class="nav-link-text ms-1">Kategori</span>
+                <span class="nav-link-text ms-1">Categories</span>
             </a>
         </li>
         <li class="nav-item">
@@ -70,7 +70,7 @@
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons opacity-10">folder</i>
                 </div>
-                <span class="nav-link-text ms-1">Produk</span>
+                <span class="nav-link-text ms-1">Products</span>
             </a>
         </li>
         <li class="nav-item">
@@ -78,7 +78,15 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Item</span>
+            <span class="nav-link-text ms-1">Items</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white {{ request()->is('item') ? 'nav-link active bg-gradient-primary' : '' }}" aria-current="page" href="{{route('item')}}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">payments</i>
+            </div>
+            <span class="nav-link-text ms-1">Payments</span>
           </a>
         </li>
         <li class="nav-item mt-3">

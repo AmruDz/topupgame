@@ -42,11 +42,11 @@
 
 <!-- Start Categories of The Month -->
 <section class="container py-5">
-    <div class="row">
+    <div class="row mt-4 ps-4">
         @foreach ($tampilanProduk as $a)
             @if ($a->status === 'enable')
-        <div class="col-12 col-md-2 p-0 mt-3 mx-1 border bg-dark rounded text-center">
-            <a href="{{route('transaksi.userPilihProduk', $a->id)}}" class="text-decoration-none text-dark">
+        <div class="col-md-2 p-0 mb-2 mt-1 me-2 ms-1 border bg-dark rounded text-center" style="width: 24%; height:auto;">
+            <a href="{{ route('transaksi.userPilihProduk', str_replace(' ', '-', $a->nama_produk)) }}" class="text-decoration-none text-dark">
                 <img src="{{ asset('storage/' . $a->foto) }}" class=" rounded img-fluid border">
             <h5 class="mt-3 mb-3">{{$a->nama_produk}}</h5>
             </a>

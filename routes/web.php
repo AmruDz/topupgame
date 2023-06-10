@@ -17,46 +17,52 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-$user=TransaksiController::class;
-Route::get('/', [$user, 'indexUser'])->name('tampilanProduk');
-Route::get('/{id}', [$user, 'userPilihProduk'])->name('transaksi.userPilihProduk');
+Route::middleware('auth')->group(function(){
+    Route::get('/dashboard', [TransaksiController::class, 'index'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-    $a=KategoriController::class;
-    Route::get('/kategori', [$a, 'index'])->name('kategori');
-    Route::get('/kategori/tambah-kategori', [$a, 'create'])->name('kategori.create');
-    Route::post('/kategori', [$a, 'store'])->name('kategori.store');
-    Route::get('/kategori/edit-kategori/{id}', [$a, 'edit'])->name('kategori.edit');
-    Route::put('/kategori/{id}', [$a, 'update'])->name('kategori.update');
-    Route::get('/kategori/{id}', [$a, 'destroy'])->name('kategori.destroy');
+    Route::controller(KategoriController::class)->prefix("kategori")->group(function(){
+        Route::get('', 'index')->name('kategori');
+        Route::get('/tambah-kategori', 'create')->name('kategori.create');
+        Route::post('', 'store')->name('kategori.store');
+        Route::get('/edit-kategori/{id}', 'edit')->name('kategori.edit');
+        Route::put('/{id}', 'update')->name('kategori.update');
+        Route::get('/{id}', 'destroy')->name('kategori.destroy');
+    });
 
-    $b=ProdukController::class;
-    Route::get('/produk', [$b, 'index'])->name('produk');
-    Route::get('/produk/{id}/disable', [$b, 'disable'])->name('produk.disable');
-    Route::get('/produk/{id}/enable', [$b, 'enable'])->name('produk.enable');
-    Route::get('/produk/tambah-produk', [$b, 'create'])->name('produk.create');
-    Route::post('/produk', [$b, 'store'])->name('produk.store');
-    Route::get('/produk/edit-produk/{id}', [$b, 'edit'])->name('produk.edit');
-    Route::put('/produk/{id}', [$b, 'update'])->name('produk.update');
-    Route::get('/produk/{id}', [$b, 'destroy'])->name('produk.destroy');
+    Route::controller(ProdukController::class)->prefix("produk")->group(function(){
+        Route::get('', 'index')->name('produk');
+        Route::get('/{id}/disable', 'disable')->name('produk.disable');
+        Route::get('/{id}/enable', 'enable')->name('produk.enable');
+        Route::get('/tambah-produk', 'create')->name('produk.create');
+        Route::post('', 'store')->name('produk.store');
+        Route::get('/edit-produk/{id}', 'edit')->name('produk.edit');
+        Route::put('/{id}', 'update')->name('produk.update');
+        Route::get('/{id}', 'destroy')->name('produk.destroy');
+    });
 
-    $c=ItemController::class;
-    Route::get('/item', [$c, 'index'])->name('item');
-    Route::get('/item/{id}/disable', [$c, 'disable'])->name('item.disable');
-    Route::get('/item/{id}/enable', [$c, 'enable'])->name('item.enable');
-    Route::get('/item/tambah-item', [$c, 'create'])->name('item.create');
-    Route::post('/item', [$c, 'store'])->name('item.store');
-    Route::get('/item/edit-item/{id}', [$c, 'edit'])->name('item.edit');
-    Route::put('/item/{id}', [$c, 'update'])->name('item.update');
-    Route::get('/item/{id}', [$c, 'destroy'])->name('item.destroy');
+    Route::controller(ItemController::class)->prefix("item")->group(function(){
+        Route::get('', 'index')->name('item');
+        Route::get('/{id}/disable', 'disable')->name('item.disable');
+        Route::get('/{id}/enable', 'enable')->name('item.enable');
+        Route::get('/tambah-item', 'create')->name('item.create');
+        Route::post('', 'store')->name('item.store');
+        Route::get('/edit-item/{id}', 'edit')->name('item.edit');
+        Route::put('/{id}', 'update')->name('item.update');
+        Route::get('/{id}', 'destroy')->name('item.destroy');
+    });
 
-    $d=TransaksiController::class;
-    Route::get('/dashboard', [$d, 'index'])->name('dashboard');
+    // Route::get(ProfileController::class)->prefix("profile")->group(function(){
+    //     Route::get('/profile', 'edit')->name('profile.edit');
+    //     Route::patch('/profile', 'update')->name('profile.update');
+    //     Route::delete('/profile', 'destroy')->name('profile.destroy');
+    // });
+});
 
+Route::controller(TransaksiController::class)->group(function(){
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+    Route::get('/', 'indexUser')->name('tampilanProduk');
+    Route::get('/belanja/{nama_produk}', 'userPilihProduk')->name('transaksi.userPilihProduk');
+    Route::view('/invoice', 'invoice');
+});
 
-// require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';

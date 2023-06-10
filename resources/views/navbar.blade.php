@@ -28,7 +28,7 @@
             <div class="align-self-center" id="templatemo_main_nav">
                     <ul class="nav navbar-nav d-flex justify-content-end">
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
+                            <a class="nav-link" href="{{route('tampilanProduk')}}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Check Invoice</a>
@@ -66,7 +66,7 @@
                     <ul class="list-unstyled text-light footer-link-list">
                         @foreach ($tampilanProduk as $a)
                         @if ($a->status === 'enable')
-                            <li><a class="text-decoration-none" href="{{route('transaksi.userPilihProduk', $a->id)}}">{{$a->nama_produk}}</a></li>
+                            <li><a class="text-decoration-none" href="{{ route('transaksi.userPilihProduk', str_replace(' ', '-', $a->nama_produk)) }}">{{$a->nama_produk}}</a></li>
                         @endif
                         @endforeach
                     </ul>

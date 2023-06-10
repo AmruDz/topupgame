@@ -34,15 +34,24 @@ class TransaksiController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function userPilihProduk($id)
+    public function userPilihProduk($nama_produk)
     {
-        $pilihProduk = produk::findOrFail($id);
-        $tampilanProduk = produk::where('status', 'enable')->get();
-        $tampilanItem = $pilihProduk->item()->where('status', 'enable')->get();
+    $nama_produk = str_replace('-', ' ', $nama_produk);
+    $pilihProduk = produk::where('nama_produk', $nama_produk)->first();
+    $tampilanProduk = produk::where('status', 'enable')->get();
+    $tampilanItem = $pilihProduk->item()->where('status', 'enable')->get();
 
-        return view('tampilan_produk', compact('pilihProduk', 'tampilanProduk', 'tampilanItem'));
-
+    return view('tampilan_produk', compact('pilihProduk', 'tampilanProduk', 'tampilanItem'));
     }
+
+    // public function invoice($nama_produk)
+    // {
+    // $tampilanInvoice = transaksi::all();
+    // $nama_produk = str_replace('-', ' ', $nama_produk);
+    // $pilihProduk = produk::where('nama_produk', $nama_produk)->first();
+    // $tampilanProduk = produk::where('status', 'enable')->get();
+    // return view('invoice', compact('tampilanInvoice', 'pilihProduk', 'tampilanProduk'));
+    // }
 
     /**
      * Store a newly created resource in storage.
