@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->text('foto')->nullable();
+            $table->string('nama_payment');
+            $table->string('fee');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

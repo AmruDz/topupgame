@@ -4,7 +4,9 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use Faker\Provider\Payment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +53,17 @@ Route::middleware('auth')->group(function(){
         Route::get('/{id}', 'destroy')->name('item.destroy');
     });
 
+    Route::controller(PaymentController::class)->prefix("payment")->group(function(){
+        Route::get('', 'index')->name('payment');
+        Route::get('/{id}/disable', 'disable')->name('payment.disable');
+        Route::get('/{id}/enable', 'enable')->name('payment.enable');
+        Route::get('/tambah-payment', 'create')->name('payment.create');
+        Route::post('', 'store')->name('payment.store');
+        Route::get('/edit-payment/{id}', 'edit')->name('payment.edit');
+        Route::put('/{id}', 'update')->name('payment.update');
+        Route::get('/{id}', 'destroy')->name('payment.destroy');
+    });
+
     // Route::get(ProfileController::class)->prefix("profile")->group(function(){
     //     Route::get('/profile', 'edit')->name('profile.edit');
     //     Route::patch('/profile', 'update')->name('profile.update');
@@ -62,7 +75,10 @@ Route::controller(TransaksiController::class)->group(function(){
 
     Route::get('/', 'indexUser')->name('tampilanProduk');
     Route::get('/belanja/{nama_produk}', 'userPilihProduk')->name('transaksi.userPilihProduk');
-    Route::view('/invoice', 'invoice');
+    Route::post('/', 'store')->name('transaksi.store');
+    Route::get('/invoice', 'invoice')->name('invoice');
+    Route::get('/about', 'about')->name('about');
+    Route::get('/contact', 'contact')->name('contact');
 });
 
 require __DIR__.'/auth.php';

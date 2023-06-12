@@ -34,7 +34,7 @@
               <div class="input-group input-group-outline my-3">
                 <select class="form-control" name="produk_id" aria-label="Default select example" required>
                     @foreach ($produk as $a)
-                        <option value="{{ $a->id }}" @if($a->produk_id == $a->id) selected @endif>{{$a->nama_produk}}</option>
+                        <option value="{{ $a->id }}" @if($a->id == $item->produk_id) selected @endif>{{$a->nama_produk}}</option>
                     @endforeach
                 </select>
               </div>
