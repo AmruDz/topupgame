@@ -1,300 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+@extends('navbar')
 
+@section('title', 'Invoice')
 
-<title>Invoice receipt - Bootdey.com</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-<style type="text/css">
-    	.receipt-content .logo a:hover {
-  text-decoration: none;
-  color: #7793C4;
-}
+@section('content')
+<div class="card col-lg-12 m-5 p-5">
+    <div class="card-body mx-5">
+      <div class="container px-5">
+        <h6 class="my-4" style="font-size: 14px;">status:</h6>
+        <div class="row">
+          <ul class="list-unstyled">
+            <li><h6 style="font-size: 14px;">12345678 1234</h6></li>
+            <li class="text-muted mt-1"><h6>Invoice: <span id="invoice">12345 <button class="salin-teks btn btn-dark" data-teks="invoice"></button></span></h6></li>
+            <li class="mt-1" ><h6 style="font-size: 10px;">2023-06-10 22:10:18</h6></li>
+          </ul>
+          <div class="col-xl-10 mt-3">
+            <p>Item</p>
+          </div>
+          <div class="col-xl-2 mt-3">
+            <p class="float-end">Amount
+            </p>
+          </div>
+          <hr>
+          <div class="col-xl-10">
+            <p>86 Diamonds</p>
+          </div>
+          <div class="col-xl-2">
+            <p class="float-end">Rp 199.00
+            </p>
+          </div>
+          <hr>
+        </div>
+        <div class="row">
+          <div class="col-xl-10">
+            <p>fee</p>
+          </div>
+          <div class="col-xl-2">
+            <p class="float-end">Rp 10.00
+            </p>
+          </div>
+          <hr style="border: 2px solid black;">
+        </div>
+        <div class="row text-black">
 
-.receipt-content .invoice-wrapper {
-  background: #FFF;
-  border: 1px solid #CDD3E2;
-  box-shadow: 0px 0px 1px #CCC;
-  padding: 40px 40px 60px;
-  margin-top: 40px;
-  border-radius: 4px;
-}
+          <div class="col-xl-12">
+            <p class="float-end fw-bold">Total: Rp 10.00
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var buttons = document.querySelectorAll('.salin-teks');
 
-.receipt-content .invoice-wrapper .payment-details span {
-  color: #A9B0BB;
-  display: block;
-}
-.receipt-content .invoice-wrapper .payment-details a {
-  display: inline-block;
-  margin-top: 5px;
-}
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var teks = this.getAttribute('data-teks');
 
-.receipt-content .invoice-wrapper .line-items .print a {
-  display: inline-block;
-  border: 1px solid #9CB5D6;
-  padding: 13px 13px;
-  border-radius: 5px;
-  color: #708DC0;
-  font-size: 13px;
-  -webkit-transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -ms-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-}
-
-.receipt-content .invoice-wrapper .line-items .print a:hover {
-  text-decoration: none;
-  border-color: #333;
-  color: #333;
-}
-
-.receipt-content {
-  background: #ECEEF4;
-}
-@media (min-width: 1200px) {
-  .receipt-content .container {width: 900px; }
-}
-
-.receipt-content .logo {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.receipt-content .logo a {
-  font-family: Myriad Pro, Lato, Helvetica Neue, Arial;
-  font-size: 36px;
-  letter-spacing: .1px;
-  color: #555;
-  font-weight: 300;
-  -webkit-transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -ms-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-}
-
-.receipt-content .invoice-wrapper .intro {
-  line-height: 25px;
-  color: #444;
-}
-
-.receipt-content .invoice-wrapper .payment-info {
-  margin-top: 25px;
-  padding-top: 15px;
-}
-
-.receipt-content .invoice-wrapper .payment-info span {
-  color: #A9B0BB;
-}
-
-.receipt-content .invoice-wrapper .payment-info strong {
-  display: block;
-  color: #444;
-  margin-top: 3px;
-}
-
-@media (max-width: 767px) {
-  .receipt-content .invoice-wrapper .payment-info .text-right {
-  text-align: left;
-  margin-top: 20px; }
-}
-.receipt-content .invoice-wrapper .payment-details {
-  border-top: 2px solid #EBECEE;
-  margin-top: 30px;
-  padding-top: 20px;
-  line-height: 22px;
-}
-
-
-@media (max-width: 767px) {
-  .receipt-content .invoice-wrapper .payment-details .text-right {
-  text-align: left;
-  margin-top: 20px; }
-}
-.receipt-content .invoice-wrapper .line-items {
-  margin-top: 40px;
-}
-.receipt-content .invoice-wrapper .line-items .headers {
-  color: #A9B0BB;
-  font-size: 13px;
-  letter-spacing: .3px;
-  border-bottom: 2px solid #EBECEE;
-  padding-bottom: 4px;
-}
-.receipt-content .invoice-wrapper .line-items .items {
-  margin-top: 8px;
-  border-bottom: 2px solid #EBECEE;
-  padding-bottom: 8px;
-}
-.receipt-content .invoice-wrapper .line-items .items .item {
-  padding: 10px 0;
-  color: #696969;
-  font-size: 15px;
-}
-@media (max-width: 767px) {
-  .receipt-content .invoice-wrapper .line-items .items .item {
-  font-size: 13px; }
-}
-.receipt-content .invoice-wrapper .line-items .items .item .amount {
-  letter-spacing: 0.1px;
-  color: #84868A;
-  font-size: 16px;
- }
-@media (max-width: 767px) {
-  .receipt-content .invoice-wrapper .line-items .items .item .amount {
-  font-size: 13px; }
-}
-
-.receipt-content .invoice-wrapper .line-items .total {
-  margin-top: 30px;
-}
-
-.receipt-content .invoice-wrapper .line-items .total .extra-notes {
-  float: left;
-  width: 40%;
-  text-align: left;
-  font-size: 13px;
-  color: #7A7A7A;
-  line-height: 20px;
-}
-
-@media (max-width: 767px) {
-  .receipt-content .invoice-wrapper .line-items .total .extra-notes {
-  width: 100%;
-  margin-bottom: 30px;
-  float: none; }
-}
-
-.receipt-content .invoice-wrapper .line-items .total .extra-notes strong {
-  display: block;
-  margin-bottom: 5px;
-  color: #454545;
-}
-
-.receipt-content .invoice-wrapper .line-items .total .field {
-  margin-bottom: 7px;
-  font-size: 14px;
-  color: #555;
-}
-
-.receipt-content .invoice-wrapper .line-items .total .field.grand-total {
-  margin-top: 10px;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.receipt-content .invoice-wrapper .line-items .total .field.grand-total span {
-  color: #20A720;
-  font-size: 16px;
-}
-
-.receipt-content .invoice-wrapper .line-items .total .field span {
-  display: inline-block;
-  margin-left: 20px;
-  min-width: 85px;
-  color: #84868A;
-  font-size: 15px;
-}
-
-.receipt-content .invoice-wrapper .line-items .print {
-  margin-top: 50px;
-  text-align: center;
-}
-
-
-
-.receipt-content .invoice-wrapper .line-items .print a i {
-  margin-right: 3px;
-  font-size: 14px;
-}
-
-.receipt-content .footer {
-  margin-top: 40px;
-  margin-bottom: 110px;
-  text-align: center;
-  font-size: 12px;
-  color: #969CAD;
-}
-    </style>
-</head>
-<body>
-<div class="receipt-content">
-<div class="container bootstrap snippets bootdey">
-<div class="row">
-<div class="col-md-12 ">
-<div class="invoice-wrapper">
-<div class="payment-info">
-<div class="row">
-<div class="col-sm-6">
-<span>Invoice No.</span>
-<strong>434334343</strong>
-</div>
-<div class="col-sm-6 text-right">
-<span>Payment Date</span>
-<strong>2023/06/10 12:20:39</strong>
-</div>
-</div>
-</div>
-<div class="payment-details">
-<div class="row">
-<div class="col-sm-6">
-<span>Data</span>
-<strong>
-12345678 1234
-</strong>
-</div>
-<div class="col-sm-6 text-right">
-<span>Produk</span>
-<strong>
-Mobile Legends
-</strong>
-</div>
-</div>
-</div>
-<div class="line-items">
-<div class="headers clearfix">
-<div class="row">
-<div class="col-xs-4">Description</div>
-<div class="col-xs-8 text-right">Amount</div>
-</div>
-</div>
-<div class="items">
-<div class="row item">
-<div class="col-xs-4 desc">
-344 Diamonds
-</div>
-<div class="col-xs-8 amount text-right">
-Rp 79.000
-</div>
-</div>
-</div>
-<div class="total text-right">
-<div class="field">
-Subtotal <span>Rp 79.000</span>
-</div>
-<div class="field">
-Fee <span>Rp 1.580</span>
-</div>
-<div class="field grand-total">
-Total <span>Rp 80.580</span>
-</div>
-</div>
-<div class="print">
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-
-
+                navigator.clipboard.writeText(teks).then(function() {
+                    console.log('Teks berhasil disalin: ' + teks);
+                }).catch(function(error) {
+                    console.error('Teks gagal disalin: ', error);
+                });
+            });
+        });
+    });
 </script>
-</body>
-</html>
+@endsection

@@ -26,4 +26,28 @@ class transaksi extends Model
     {
         return $this->belongsTo(item::class, 'item_id');
     }
+
+    function generateInvoiceNumber()
+{
+    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $length = 10;
+    $invoiceNumber = '';
+
+    do {
+        $invoiceNumber = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $invoiceNumber .= $characters[rand(0, strlen($characters) - 1)];
+        }
+    } while (Transaksi::isInvoiceNumberExists($invoiceNumber));
+
+    return $invoiceNumber;
+}
+
+    public static function isInvoiceNumberExists($invoiceNumber)
+    {
+        return self::where('nomor_invoice', $invoiceNumber)->exists();
+    }
+
+
 }

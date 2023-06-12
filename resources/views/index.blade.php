@@ -45,7 +45,7 @@
     <div class="row mt-4 ps-4">
         @foreach ($tampilanProduk as $a)
             @if ($a->status === 'enable')
-        <div class="col-md-2 p-0 mb-2 mt-1 me-2 ms-1 border bg-dark rounded text-center" style="width: 24%; height:auto;">
+        <div class="col-lg-2 p-0 mb-2 mt-1 mx-2 border bg-dark rounded text-center" style="width: 18%; height:auto;">
             <a href="{{ route('transaksi.userPilihProduk', str_replace(' ', '-', $a->nama_produk)) }}" class="text-decoration-none text-dark">
                 <img src="{{ asset('storage/' . $a->foto) }}" class=" rounded img-fluid border">
             <h5 class="mt-3 mb-3">{{$a->nama_produk}}</h5>

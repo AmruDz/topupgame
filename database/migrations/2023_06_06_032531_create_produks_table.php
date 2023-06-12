@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('kategori_id');
             $table->string('nama_produk');
             $table->string('deskripsi');
-            $table->string('foto')->nullable();
-            $table->string('status');
+            $table->text('foto')->nullable();
+            $table->string('status')->nullable();
             $table->foreign('kategori_id')->references('id')->on('kategoris');
             $table->timestamps();
         });

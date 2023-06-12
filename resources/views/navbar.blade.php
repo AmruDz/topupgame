@@ -34,10 +34,10 @@
                             <a class="nav-link" href="#">Check Invoice</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="{{route('about')}}">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="{{route('contact')}}">Contact</a>
                         </li>
                     </ul>
             </div>
@@ -101,6 +101,7 @@
         </div>
 
     </footer>
+
     <!-- End Footer -->
 
     <!-- Start Script -->

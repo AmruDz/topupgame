@@ -82,7 +82,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white {{ request()->is('item') ? 'nav-link active bg-gradient-primary' : '' }}" aria-current="page" href="{{route('item')}}">
+          <a class="nav-link text-white {{ request()->is('payment') ? 'nav-link active bg-gradient-primary' : '' }}" aria-current="page" href="{{route('payment')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">payments</i>
             </div>
@@ -116,8 +116,8 @@
     @if(session('success'))
           {{ session('success') }}
     @endif
-    @if(session('error'))
-          {{ session('error') }}
+    @if($errors->any())
+    {!! implode('', $errors->all('<div>:message</div>')) !!}
     @endif
     @yield('content')
   </main>

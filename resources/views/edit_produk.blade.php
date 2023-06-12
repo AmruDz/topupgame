@@ -32,7 +32,7 @@
                             <input type="text" name="nama_produk" value="{{ $produk->nama_produk }}" class="form-control" required>
                         </div>
                         <div class="input-group input-group-outline my-3">
-                            <select class="form-control" name="produk_id" aria-label="Default select example" required>
+                            <select class="form-control" name="kategori_id" aria-label="Default select example" required>
                                 @foreach ($kategori as $a)
                                 <option value="{{ $a->id }}" @if($a->id == $produk->kategori_id) selected @endif>{{ $a->nama_kategori }}</option>
                                 @endforeach
