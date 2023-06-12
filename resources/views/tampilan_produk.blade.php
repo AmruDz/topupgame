@@ -84,12 +84,12 @@
                     <div class="card-body">
                         <h4 class="mt-2">4. Masukkan Nomor Whatsapp</h4>
                         <input type="number" class="col-lg-12 mt-4 form-control" placeholder="08XXXXXXX">
-                        <input type="text" name="invoice" id="invoiceNumberInput">
-                        <input type="text" name="data" id="dataInput">
-                        <input type="text" name="waktu" id="current-time">
-                        <input type="text" name="item_id" id="itemIdInput">
-                        <input type="text" name="status" value="success">
-                        <input type="text" name="total_pembayaran" id="totalPembayaranInput">
+                        <input type="hide" name="invoice" id="invoiceNumberInput">
+                        <input type="hide" name="data" id="dataInput">
+                        <input type="hide" name="waktu" id="current-time">
+                        <input type="hide" name="item_id" id="itemIdInput">
+                        <input type="hide" name="status" value="success">
+                        <input type="hide" name="total_pembayaran" id="totalPembayaranInput">
                         <button type="submit" class="btn btn-success col-lg-12 mt-3 mb-5" style="height: 45px;">Beli Sekarang</button>
                     </div>
                 </form>

@@ -124,6 +124,6 @@ class TransaksiController extends Controller
      */
     public function destroy(transaksi $transaksi)
     {
-        //
+        
     }
 }
