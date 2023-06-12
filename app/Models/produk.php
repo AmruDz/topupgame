@@ -15,6 +15,7 @@ class produk extends Model
         'produk',
         'deskripsi',
         'status',
+        'foto'=>'required|image|mimes:jpeg,jpg,png,bmp,gif,svg'
     ];
 
 

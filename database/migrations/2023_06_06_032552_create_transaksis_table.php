@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('invoice');
             $table->string('data');
-            $table->string('waktu');
+            $table->text('waktu');
             $table->unsignedBigInteger('item_id');
             $table->string('status');
             $table->string('total_pembayaran');
