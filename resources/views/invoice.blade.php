@@ -6,12 +6,18 @@
 <div class="card col-lg-12 m-5 p-5">
     <div class="card-body mx-5">
       <div class="container px-5">
-        <h6 class="my-4" style="font-size: 14px;">status:</h6>
+        <h6 class="my-4" style="font-size: 14px;">status:
+            @if ($invoiceyangdipilih->status == 'success')
+            <span class="badge badge-sm bg-success">success</span>
+            @else
+                <span class="badge badge-sm bg-primary">pending</a>
+            @endif
+        </h6>
         <div class="row">
           <ul class="list-unstyled">
-            <li><h6 style="font-size: 14px;">12345678 1234</h6></li>
-            <li class="text-muted mt-1"><h6>Invoice: <span id="invoice">12345 <button class="salin-teks btn btn-dark" data-teks="invoice"></button></span></h6></li>
-            <li class="mt-1" ><h6 style="font-size: 10px;">2023-06-10 22:10:18</h6></li>
+            <li><h6 style="font-size: 14px;">{{$invoiceyangdipilih->data}}</h6></li>
+            <li class="text-muted mt-1"><h6>Invoice: <span id="invoice">{{$invoiceyangdipilih->invoice}} <button class="salin-teks btn btn-dark" data-teks="invoice"></button></span></h6></li>
+            <li class="mt-1" ><h6 style="font-size: 10px;">{{$invoiceyangdipilih->waktu}}</h6></li>
           </ul>
           <div class="col-xl-10 mt-3">
             <p>Item</p>
@@ -22,7 +28,7 @@
           </div>
           <hr>
           <div class="col-xl-10">
-            <p>86 Diamonds</p>
+            <p>{{$invoiceyangdipilih->item_id}}</p>
           </div>
           <div class="col-xl-2">
             <p class="float-end">Rp 199.00

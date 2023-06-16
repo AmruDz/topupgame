@@ -76,7 +76,7 @@ Route::controller(TransaksiController::class)->group(function(){
     Route::get('/', 'indexUser')->name('tampilanProduk');
     Route::get('/belanja/{nama_produk}', 'userPilihProduk')->name('transaksi.userPilihProduk');
     Route::post('/', 'store')->name('transaksi.store');
-    Route::get('/invoice', 'invoice')->name('invoice');
+    Route::get('/invoice/{invoice}', 'invoice')->name('invoice');
     Route::get('/about', 'about')->name('about');
     Route::get('/contact', 'contact')->name('contact');
 });

@@ -48,11 +48,14 @@ class TransaksiController extends Controller
     return view('tampilan_produk', compact('pilihProduk', 'tampilanProduk', 'tampilanItem', 'tampilanPayment', 'item'));
     }
 
-    public function invoice()
+    public function invoice($invoice)
     {
+    $invoice = str_replace('-', ' ', $invoice);
+    $invoiceyangdipilih = transaksi::where('invoice', $invoice)->first();
     $tampilanInvoice = transaksi::all();
     $tampilanProduk = produk::where('status', 'enable')->get();
-    return view('invoice', compact('tampilanInvoice',  'tampilanProduk'));
+    $item = item::all();
+    return view('invoice', compact('invoiceyangdipilih','tampilanInvoice',  'tampilanProduk', 'item'));
     }
 
     public function about()
@@ -72,7 +75,6 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi data yang diterima dari formulir
         $validatedData = $request->validate([
             'invoice' => 'required',
             'data' => 'required',
@@ -81,7 +83,6 @@ class TransaksiController extends Controller
             'nomor_whatsapp' => 'required',
         ]);
 
-        // Simpan data transaksi ke dalam tabel
         $transaksi = new Transaksi;
         $transaksi->invoice = $validatedData['invoice'];
         $transaksi->data = $validatedData['data'];
@@ -89,6 +90,13 @@ class TransaksiController extends Controller
         $transaksi->item_id = $validatedData['item_id'];
         $transaksi->status = 'success';
         $transaksi->total_pembayaran = $request->input('total_pembayaran');
+
+        // Ambil nilai total_pembayaran dari input dengan class "nominal-payment"
+        if ($request->has('total_pembayaran')) {
+            $totalPembayaran = $request->input('total_pembayaran');
+            $transaksi->total_pembayaran = str_replace(',', '', $totalPembayaran);
+        }
+
         $transaksi->nomor_whatsapp = $validatedData['nomor_whatsapp'];
         $transaksi->save();
 

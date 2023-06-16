@@ -47,6 +47,11 @@
 @show
 
     <section class="container py-5">
+        <script>
+            @if($errors->any())
+                alert('{{ $errors->first() }}')
+            @endif
+        </script>
         @yield('content')
     </section>
 
