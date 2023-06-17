@@ -268,7 +268,23 @@
                             <p class="text-sm font-weight-bold mb-0">{{$a->item->produk->nama_produk}}</p>
                           </td>
                           <td class="align-middle text-center text-xs">
-                            <span class="badge badge-xs bg-gradient-success">{{$a->status}}</span>
+                                @if ($a->status == 'success')
+                                    <a href="{{ route('pending', $a->id) }}" class="badge badge-sm bg-success">success</a>
+                                @elseif ($a->status == 'pending')
+                                    <a href="{{ route('success', $a->id) }}" class="badge badge-sm bg-light">pending</a>
+                                    <script>
+                                        setTimeout(function() {
+                                            window.location.href = "{{ route('success', $a->id) }}";
+                                        }, 10000);
+                                    </script>
+                                @else
+                                    <a href="{{ route('pending', $a->id) }}" class="badge badge-sm bg-info">paid</a>
+                                    <script>
+                                        setTimeout(function() {
+                                            window.location.href = "{{ route('pending', $a->id) }}";
+                                        }, 10000);
+                                    </script>
+                                @endif
                           </td>
                           <td class="align-middle text-center">
                             <p class="text-sm font-weight-bold mb-0">{{$a->nomor_whatsapp}}</p>
@@ -290,4 +306,12 @@
     </div>
   </div>
 </div>
+<script>
+    function refreshPage() {
+        location.reload(); // Merefresh halaman
+    }
+
+    // Panggil fungsi untuk merefresh halaman setiap detik
+    setInterval(refreshPage, 20000);
+</script>
 @endsection

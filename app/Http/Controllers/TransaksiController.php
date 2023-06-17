@@ -27,6 +27,28 @@ class TransaksiController extends Controller
         return view('dashboard', compact('dashboard', 'banyaktransaksi', 'transaksiHariIni'));
     }
 
+    public function pending($id)
+    {
+        $transaksi = transaksi::findOrFail($id);
+        $transaksi->status = 'pending';
+        $transaksi->update();
+
+        return redirect()->route('dashboard')->with('info', 'Transaksi dalam pending');
+    }
+
+    public function success($id)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->status = 'success';
+        $transaksi->update();
+
+        $item = Item::findOrFail($transaksi->item_id);
+        $item->stock -= 1;
+        $item->save();
+
+        return redirect()->route('dashboard')->with('success', 'Transaksi berhasil.');
+    }
+
     public function indexUser()
     {
         $tampilanProduk = produk::where('status', 'enable')->get();
@@ -56,6 +78,28 @@ class TransaksiController extends Controller
     $tampilanProduk = produk::where('status', 'enable')->get();
     $item = item::all();
     return view('invoice', compact('invoiceyangdipilih','tampilanInvoice',  'tampilanProduk', 'item'));
+    }
+
+    public function cariInvoice(Request $request)
+    {
+        $item = Item::all();
+        $tampilanProduk = Produk::where('status', 'enable')->get();
+        $keyword = $request->input('invoice_number');
+        $transaksi = Transaksi::where('invoice', $keyword)->first();
+
+        return view('cari_invoice', compact('tampilanProduk', 'item', 'transaksi'));
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('invoice_number');
+        $transaksi = Transaksi::where('invoice', $keyword)->first();
+
+        if ($transaksi) {
+            return redirect()->route('cariInvoice', ['invoice_number' => $transaksi->invoice]);
+        } else {
+            return redirect()->back()->with('error', 'Invoice not found.');
+        }
     }
 
     public function about()
@@ -88,10 +132,9 @@ class TransaksiController extends Controller
         $transaksi->data = $validatedData['data'];
         $transaksi->waktu = $validatedData['waktu'];
         $transaksi->item_id = $validatedData['item_id'];
-        $transaksi->status = 'success';
+        $transaksi->status = 'paid';
         $transaksi->total_pembayaran = $request->input('total_pembayaran');
 
-        // Ambil nilai total_pembayaran dari input dengan class "nominal-payment"
         if ($request->has('total_pembayaran')) {
             $totalPembayaran = $request->input('total_pembayaran');
             $transaksi->total_pembayaran = str_replace(',', '', $totalPembayaran);
@@ -100,7 +143,7 @@ class TransaksiController extends Controller
         $transaksi->nomor_whatsapp = $validatedData['nomor_whatsapp'];
         $transaksi->save();
 
-        return redirect()->route('invoice')->with('success', 'Transaksi berhasil.');
+        return redirect()->route('invoice', ['invoice' => $transaksi->invoice])->with('success', 'Transaksi berhasil.');
     }
 
     /**

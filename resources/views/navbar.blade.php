@@ -15,35 +15,34 @@
 <body>
     @section('sidebar')
     <nav class="navbar navbar-expand-lg navbar-light shadow">
-        <div class="container d-flex align-items-center">
-
-            <a class="navbar-brand text-success logo h1 align-self-center" href="{{route('tampilanProduk')}}">
+        <div class="container">
+            <a class="navbar-brand text-success logo h1" href="{{route('tampilanProduk')}}">
                 Cztore
             </a>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="templatemo_main_nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="align-self-center" id="templatemo_main_nav">
-                    <ul class="nav navbar-nav d-flex justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('tampilanProduk')}}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Check Invoice</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('about')}}">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('contact')}}">Contact</a>
-                        </li>
-                    </ul>
+            <div class="collapse navbar-collapse" id="templatemo_main_nav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('tampilanProduk')}}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('cariInvoice')}}">Check Invoice</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('about')}}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('contact')}}">Contact</a>
+                    </li>
+                </ul>
             </div>
-
         </div>
     </nav>
+
 @show
 
     <section class="container py-5">

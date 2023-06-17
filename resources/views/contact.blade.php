@@ -44,7 +44,7 @@
             </div>
             <div class="row">
                 <div class="col text-end mt-2">
-                    <button type="submit" class="btn btn-success btn-lg px-3">Let’s Talk</button>
+                    <button type="submit" class="btn btn-success btn-lg px-3">Kirim</button>
                 </div>
             </div>
         </form>

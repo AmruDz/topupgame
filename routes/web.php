@@ -20,7 +20,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::middleware('auth')->group(function(){
-    Route::get('/dashboard', [TransaksiController::class, 'index'])->name('dashboard');
+
+Route::controller(TransaksiController::class)->prefix("dashboard")->group(function(){
+    Route::get('', 'index')->name('dashboard');
+    Route::get('/{id}/pending', 'pending')->name('pending');
+    Route::get('/{id}/success', 'success')->name('success');
+});
 
     Route::controller(KategoriController::class)->prefix("kategori")->group(function(){
         Route::get('', 'index')->name('kategori');
@@ -72,11 +77,12 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::controller(TransaksiController::class)->group(function(){
-
     Route::get('/', 'indexUser')->name('tampilanProduk');
     Route::get('/belanja/{nama_produk}', 'userPilihProduk')->name('transaksi.userPilihProduk');
     Route::post('/', 'store')->name('transaksi.store');
     Route::get('/invoice/{invoice}', 'invoice')->name('invoice');
+    Route::get('/cari-invoice', 'cariInvoice')->name('cariInvoice');
+    Route::post('/cari-invoice','search')->name('search');
     Route::get('/about', 'about')->name('about');
     Route::get('/contact', 'contact')->name('contact');
 });

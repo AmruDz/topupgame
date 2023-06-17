@@ -123,8 +123,10 @@
                                 <span class="badge">
                                     @if ($a->status == 'enable')
                                         <a href="{{ route('item.disable', $a->id) }}" class="badge badge-sm bg-success">Enable</a>
-                                    @else
+                                    @elseif ($a->status == 'disable')
                                         <a href="{{ route('item.enable', $a->id) }}" class="badge badge-sm bg-primary">Disable</a>
+                                    @else
+                                        <a href="{{ route('item.enable', $a->id) }}" class="badge badge-sm bg-info">New</a>
                                     @endif
                                 </span>
                             </td>
