@@ -101,11 +101,16 @@
           </a>
         </li> --}}
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{route('logout')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">logout</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Out</span>
+            <a class="nav-link text-white dropdown-item" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+               <i class="material-icons opacity-10">logout</i>
+             </div>
+             <span class="nav-link-text ms-1">{{ __('Logout') }}</span>
+         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+             @csrf
+         </form>
           </a>
         </li>
       </ul>
@@ -196,9 +201,6 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="/assets/js/material-dashboard.min.js?v=3.1.0"></script>
 </body>
 

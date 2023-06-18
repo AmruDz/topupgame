@@ -23,9 +23,9 @@
                         @if ($transaksi['status'] == 'success')
                             <span class="badge badge-sm bg-success">Success</span>
                         @elseif ($transaksi['status'] == 'pending')
-                            <span class="badge badge-sm bg-primary">Pending</span>
+                            <span class="badge badge-sm bg-light">Pending</span>
                         @else
-                            <span class="badge badge-sm bg-warning">On Hold</span>
+                            <span class="badge badge-sm bg-primary">Paid</span>
                         @endif
                     </h6>
                     <ul class="list-unstyled">
